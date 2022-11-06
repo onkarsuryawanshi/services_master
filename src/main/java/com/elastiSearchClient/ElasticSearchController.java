@@ -1,4 +1,4 @@
-package com.ex.ES_rest_client;
+package com.elastiSearchClient;
 
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchResponse;

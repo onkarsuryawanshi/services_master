@@ -1,4 +1,4 @@
-package com.ex.ES_rest_client;
+package com.elastiSearchClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

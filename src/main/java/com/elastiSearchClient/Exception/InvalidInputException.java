@@ -1,4 +1,4 @@
-package com.ex.ES_rest_client.Exception;
+package com.elastiSearchClient.Exception;
 
 import org.elasticsearch.ElasticsearchException;
 

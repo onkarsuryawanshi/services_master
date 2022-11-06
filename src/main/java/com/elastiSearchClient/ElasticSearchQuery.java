@@ -1,7 +1,8 @@
-package com.ex.ES_rest_client;
+package com.elastiSearchClient;
 
-import com.ex.ES_rest_client.Exception.InvalidInputException;
-import com.ex.ES_rest_client.client.LocalHostClient;
+import com.elastiSearchClient.Exception.InvalidInputException;
+import com.elastiSearchClient.client.LocalHostClient;
+import com.elastiSearchClient.config.ES_config;
 import org.apache.lucene.search.TotalHits;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
@@ -33,8 +34,6 @@ import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.*;
 
-import static com.ex.ES_rest_client.config.ES_config.indexName;
-
 @Repository
 public class ElasticSearchQuery {
 
@@ -43,7 +42,7 @@ public class ElasticSearchQuery {
     RestHighLevelClient client = restHighLevelClient.create();
 
     public SearchResponse getAllDocument() {
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
         searchRequest.source(searchSourceBuilder);
@@ -59,7 +58,7 @@ public class ElasticSearchQuery {
 
     public long getDocumentCount() {
 
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
         searchRequest.source(searchSourceBuilder);
@@ -82,7 +81,7 @@ public class ElasticSearchQuery {
         SumAggregationBuilder aggregationBuilders = AggregationBuilders.sum("SUM").field("DataUsed");
 
 
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(rangeQueryBuilder);
 
@@ -111,7 +110,7 @@ public class ElasticSearchQuery {
     public SearchResponse getAvgOfDataUsedBetweenTwoDates(String startDate, String endDate) {
         RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("date").gt(startDate).lt(endDate);
 
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(rangeQueryBuilder);
 
@@ -135,7 +134,7 @@ public class ElasticSearchQuery {
     public SearchResponse getMaxOfDataUsedBetweenTwoDates(String startDate, String endDate) {
         Double maxDataUsed = null;
 
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
         RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("date").gt(startDate).lt(endDate);
@@ -180,7 +179,7 @@ public class ElasticSearchQuery {
     }
 
     public SearchResponse getMinOfDataUsedBetweenTwoDates(String startDate, String endDate) {
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
 
@@ -206,7 +205,7 @@ public class ElasticSearchQuery {
         RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("date").gt(startDate).lt(endDate);
 
 
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(rangeQueryBuilder);
 
@@ -228,7 +227,7 @@ public class ElasticSearchQuery {
 
     public SearchResponse getAvgOfFieldsBetweenTwoDates(String startDate, String endDate, String userField) {
         RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("date").gt(startDate).lt(endDate);
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(rangeQueryBuilder);
         SumAggregationBuilder aggregation = AggregationBuilders.sum("Avg").field(userField);
@@ -246,7 +245,7 @@ public class ElasticSearchQuery {
 
     public GetResponse getById(String doc_Id) {
         GetRequest getRequest = new GetRequest(
-                indexName,
+                ES_config.indexName,
                 doc_Id);
 
         GetResponse response = null;
@@ -292,7 +291,7 @@ public class ElasticSearchQuery {
 
     public List<String> getDocumentByRadioType() {
 
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 //        searchSourceBuilder.query(QueryBuilders.matchQuery("radioType",inputRadioType));
         AggregationBuilder aggregation =
@@ -325,7 +324,7 @@ public class ElasticSearchQuery {
 
 //    A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
     public Map<String, Long> getAggByOperators() {
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         TermsAggregationBuilder aggregation =AggregationBuilders
                 .terms("operators")
@@ -353,7 +352,7 @@ public class ElasticSearchQuery {
 
     public Map<ZonedDateTime, Long> getHistogramAggregationByDate() {
 
-        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchRequest searchRequest = new SearchRequest(ES_config.indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         AggregationBuilder aggregation =
                 AggregationBuilders

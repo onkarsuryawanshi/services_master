@@ -1,4 +1,4 @@
-package com.ex.ES_rest_client.config;
+package com.elastiSearchClient.config;
 
 import org.springframework.context.annotation.Configuration;
 

@@ -1,6 +1,6 @@
-package com.ex.ES_rest_client.services;
+package com.elastiSearchClient.services;
 
-import com.ex.ES_rest_client.client.LocalHostClient;
+import com.elastiSearchClient.client.LocalHostClient;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;

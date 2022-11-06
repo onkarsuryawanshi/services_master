@@ -1,4 +1,4 @@
-package com.ex.ES_rest_client.Exception;
+package com.elastiSearchClient.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
