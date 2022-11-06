@@ -1,7 +1,7 @@
-package com.ex.query;
+package com.service_3.query;
 
 
-import com.ex.dataGenertor.DataGenerator;
+import com.service_3.dataGenertor.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

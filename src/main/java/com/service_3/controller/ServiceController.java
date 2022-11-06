@@ -1,12 +1,10 @@
-package com.ex.controller;
+package com.service_3.controller;
 
-import com.ex.query.Query;
+import com.service_3.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @RestController
